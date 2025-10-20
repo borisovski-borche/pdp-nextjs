@@ -1,6 +1,7 @@
 import Container from "@/components/common/container/container";
+import DeviceDetails from "@/components/ui/device-details/device-details";
 
-export default async function DeviceDetails({
+export default async function DeviceDetailsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -11,7 +12,7 @@ export default async function DeviceDetails({
 
   return (
     <Container title="Device Details">
-      <h2>This is the device details</h2>
+      <DeviceDetails id={id} />
     </Container>
   );
 }

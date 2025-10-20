@@ -5,9 +5,13 @@ import { useRouter } from "next/navigation";
 
 type DeviceItemProps = {
   device: Device;
+  showSettingsBtn?: boolean;
 };
 
-export default function DeviceItem({ device }: DeviceItemProps) {
+export default function DeviceItem({
+  device,
+  showSettingsBtn = true,
+}: DeviceItemProps) {
   const router = useRouter();
 
   const onSettingsClick = () => {
@@ -56,14 +60,16 @@ export default function DeviceItem({ device }: DeviceItemProps) {
             </strong>
           </p>
         </div>
-        <div className="justify-self-end  ">
-          <button
-            onClick={onSettingsClick}
-            className="shadow-[5px_5px] p-3 rounded-xl bg-red-300 cursor-pointer shadow-red-900 hover:-translate-y-0.5 transition"
-          >
-            View Settings <i className="fa-solid fa-gear"></i>
-          </button>
-        </div>
+        {showSettingsBtn && (
+          <div className="justify-self-end  ">
+            <button
+              onClick={onSettingsClick}
+              className="shadow-[5px_5px] p-3 rounded-xl bg-red-300 cursor-pointer shadow-red-900 hover:-translate-y-0.5 transition"
+            >
+              View Settings <i className="fa-solid fa-gear"></i>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
