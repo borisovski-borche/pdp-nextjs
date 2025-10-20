@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  buyMinutesBundle,
   buyMessageBundle,
   fetchAllDevices,
   fetchDeviceById,
@@ -33,22 +34,22 @@ export default function DeviceDetails({ id }: DeviceDetailsProps) {
 
   const confirmModalJSX = {
     BUY_SMS: (
-      <div>
+      <div className="text-2xl text-center">
         <h3>
-          Please confirm your purchase of <strong>100</strong> sms messages
+          Are you sure you want to purchase <strong>100</strong> sms messages?
         </h3>
       </div>
     ),
     BUY_CALL: (
-      <div>
+      <div className="text-2xl text-center">
         <h3>
-          Please confirm your purchase of <strong>100</strong> call minutes
+          Are you sure you want to purchase <strong>100</strong> call minutes?
         </h3>
       </div>
     ),
     CANCEL: (
-      <div>
-        <h3>Are you sure you want to cancel your subscription</h3>
+      <div className="text-2xl text-center">
+        <h3>Are you sure you want to cancel your subscription?</h3>
       </div>
     ),
   };
@@ -56,6 +57,10 @@ export default function DeviceDetails({ id }: DeviceDetailsProps) {
   const onConfirmClick = () => {
     if (dialogActon === "BUY_SMS") {
       buyMessageBundle(device?.uid as string, 100);
+    }
+
+    if (dialogActon === "BUY_CALL") {
+      buyMinutesBundle(device?.uid as string, 100);
     }
 
     dialogRef.current?.close();
@@ -96,19 +101,27 @@ export default function DeviceDetails({ id }: DeviceDetailsProps) {
       </div>
       <dialog
         closedby="any"
-        className="confirm-dialog top-[200px] mx-auto w-md h-80 rounded-xl p-4"
+        className="confirm-dialog top-[200px] mx-auto  rounded-xl "
         ref={dialogRef}
       >
-        <div>{dialogActon !== null && confirmModalJSX[dialogActon]}</div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => onConfirmClick()}
-            className="p-2 border-2 border-green-600"
-          >
-            {" "}
-            Confirm
-          </button>
-          <button className="p-2 border-2 border-red-600"> Cancel</button>
+        <div className="grid h-70 w-md grid-rows-[1fr_max-content] p-5">
+          <div>{dialogActon !== null && confirmModalJSX[dialogActon]}</div>
+          <div className="flex gap-2 justify-self-end">
+            <button
+              onClick={() => onConfirmClick()}
+              className="shadow-[5px_5px] p-3 rounded-xl bg-green-300 cursor-pointer shadow-green-900 hover:-translate-y-0.5 transition"
+            >
+              {" "}
+              Confirm
+            </button>
+            <button
+              onClick={() => dialogRef.current?.close()}
+              className="shadow-[5px_5px] p-3 rounded-xl bg-red-300 cursor-pointer shadow-red-900 hover:-translate-y-0.5 transition"
+            >
+              {" "}
+              Cancel
+            </button>
+          </div>
         </div>
       </dialog>
     </div>

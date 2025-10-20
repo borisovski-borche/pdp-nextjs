@@ -7,6 +7,7 @@ interface DevicesState {
   setDevices(devices: Device[]): void;
   updateDevice(id: string, updates: Partial<Device>): void;
   updateMessages(id: string, smsBundle: number): void;
+  updateMinutes(id: string, smsBundle: number): void;
 }
 
 export const useDevicesStore = create<DevicesState>((set, get) => ({
@@ -27,8 +28,6 @@ export const useDevicesStore = create<DevicesState>((set, get) => ({
     set({ devices: updatedDevices });
   },
   updateMessages: (id: string, smsBundle: number) => {
-    console.log("in the state update");
-
     const state = get();
 
     const updatedDevices = state.devices.map(device => {
@@ -38,6 +37,24 @@ export const useDevicesStore = create<DevicesState>((set, get) => ({
           messages: {
             ...device.messages,
             total: device.messages.total + smsBundle,
+          },
+        };
+      }
+      return device;
+    });
+
+    set({ devices: updatedDevices });
+  },
+  updateMinutes: (id: string, smsBundle: number) => {
+    const state = get();
+
+    const updatedDevices = state.devices.map(device => {
+      if (device.uid === id) {
+        return {
+          ...device,
+          minutes: {
+            ...device.minutes,
+            total: device.minutes.total + smsBundle,
           },
         };
       }
