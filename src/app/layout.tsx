@@ -5,6 +5,8 @@ import Link from "next/link";
 import Header from "@/components/common/header/header";
 import Footer from "@/components/common/footer/footer";
 import { Toaster } from "sonner";
+import Head from "next/head";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script
+        src="https://kit.fontawesome.com/d32ad62e17.js"
+        crossOrigin="anonymous"
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

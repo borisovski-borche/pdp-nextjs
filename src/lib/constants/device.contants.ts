@@ -5,3 +5,5 @@ export const DEVICE_MODELS = {
   NOKIA_3310: "nokia_3310",
   NOKIA_E61: "nokia_e61",
 };
+
+export const DEVICE_MODEL_NAMES = {};
