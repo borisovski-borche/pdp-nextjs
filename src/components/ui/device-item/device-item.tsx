@@ -1,5 +1,6 @@
 "use client";
 
+import { DEVICE_MODEL_NAMES } from "@/lib/constants/device.constants";
 import { Device } from "@/lib/models/device.model";
 import { useRouter } from "next/navigation";
 
@@ -26,7 +27,7 @@ export default function DeviceItem({
       <div className="grid grid-rows-[max-content_1fr_max-content] border-l-green-800 pl-5">
         <div>
           <h3 className="text-xl font-bold pb-5">
-            {device.name} - {device.type}
+            {device.name} - {DEVICE_MODEL_NAMES[device.type]}
           </h3>
         </div>
         <div className="h-[40%] grid gap-3">
@@ -48,7 +49,7 @@ export default function DeviceItem({
               messages{" "}
             </span>
             <strong>
-              {device.messages.used} / {device.messages.total}
+              {device.messages.used} / {device.messages.total}{" "}
             </strong>
           </p>
           <p className="border-b-1 pb-2 border-b-emerald-600 flex justify-between">
@@ -56,7 +57,7 @@ export default function DeviceItem({
               <i className="fa-solid fa-clock"></i> Currently used minutes{" "}
             </span>
             <strong>
-              {device.minutes.used} / {device.minutes.total}
+              {device.minutes.used} / {device.minutes.total}{" "}
             </strong>
           </p>
         </div>

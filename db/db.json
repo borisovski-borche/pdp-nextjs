@@ -8,7 +8,7 @@
       "status": "active",
       "messages": {
         "used": 72,
-        "total": 800
+        "total": 1000
       },
       "minutes": {
         "used": 140,
@@ -53,11 +53,11 @@
       "status": "active",
       "messages": {
         "used": 310,
-        "total": 500
+        "total": 1000
       },
       "minutes": {
         "used": 390,
-        "total": 500
+        "total": 800
       }
     },
     {

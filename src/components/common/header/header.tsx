@@ -14,7 +14,7 @@ export default function Header() {
     useUserStore.persist.clearStorage();
   };
 
-  const noUserLinks = (
+  const noUserNav = (
     <>
       <Link className="hover:text-amber-700 transition" href="/login">
         Login
@@ -25,7 +25,7 @@ export default function Header() {
     </>
   );
 
-  const userLinks = (
+  const userNav = (
     <>
       <Link className="hover:text-amber-700 transition" href="/profile">
         Profile
@@ -36,13 +36,6 @@ export default function Header() {
       <Link className="hover:text-amber-700 transition" href="/settings">
         Settings
       </Link>
-      <a
-        onClick={() => onLogout()}
-        className="hover:text-amber-700 transition"
-        href="/settings"
-      >
-        Logout
-      </a>
     </>
   );
 
@@ -54,8 +47,17 @@ export default function Header() {
         </h1>
       </div>
       <nav className="flex gap-3 align-middle  bg-blue-300 p-3 shadow-[5px_5px_blue] rounded-xl  text-lg">
-        {user ? userLinks : noUserLinks}
+        {user ? userNav : noUserNav}
       </nav>
+      <div className="flex gap-3 align-middle  bg-blue-300 p-3 shadow-[5px_5px_blue] rounded-xl  text-lg">
+        <a
+          onClick={() => onLogout()}
+          className="hover:text-amber-700 transition"
+          href="/settings"
+        >
+          Logout
+        </a>
+      </div>
     </header>
   );
 }

@@ -1,23 +1,23 @@
 "use client";
 
-import {
-  buyMinutesBundle,
-  buyMessageBundle,
-  fetchDeviceById,
-} from "@/services/devices.service";
+import { buyMinutesBundle, buyMessageBundle } from "@/services/devices.service";
 import DeviceItem from "../device-item/device-item";
-import { useEffect, useRef, useState } from "react";
+import { JSX, useEffect, useRef, useState } from "react";
 import { useDevicesStore } from "@/stores/devices.store";
 import { Device } from "@/lib/models/device.model";
-
-type DIALOG_ACTION = "BUY_SMS" | "BUY_CALL" | "CANCEL";
+import {
+  CONFIRM_MODAL_OPTIONS,
+  ConfirmModalOptions,
+} from "@/lib/constants/device.constants";
 
 export default function DeviceDetails({
   fetchedDevice,
 }: {
   fetchedDevice: Device;
 }) {
-  const [dialogActon, setDialogAction] = useState<DIALOG_ACTION | null>(null);
+  const [dialogActon, setDialogAction] = useState<ConfirmModalOptions | null>(
+    null
+  );
 
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -29,7 +29,7 @@ export default function DeviceDetails({
     setSelectedDevice(fetchedDevice);
   }, []);
 
-  const confirmModalJSX = {
+  const confirmModalJSX: Record<ConfirmModalOptions, JSX.Element> = {
     BUY_SMS: (
       <div className="text-2xl text-center">
         <h3>
@@ -37,11 +37,21 @@ export default function DeviceDetails({
         </h3>
       </div>
     ),
-    BUY_CALL: (
+    BUY_MINUTES: (
       <div className="text-2xl text-center">
         <h3>
           Are you sure you want to purchase <strong>100</strong> call minutes?
         </h3>
+      </div>
+    ),
+    SUSPEND: (
+      <div className="text-2xl text-center">
+        <h3>Are you sure you want to suspend your device?</h3>
+      </div>
+    ),
+    RESUME: (
+      <div className="text-2xl text-center">
+        <h3>Please confirm if you want to resume your service.</h3>
       </div>
     ),
     CANCEL: (
@@ -52,18 +62,30 @@ export default function DeviceDetails({
   };
 
   const onConfirmClick = () => {
-    if (dialogActon === "BUY_SMS") {
+    if (dialogActon === CONFIRM_MODAL_OPTIONS.BUY_SMS) {
       buyMessageBundle(device as Device, 100);
     }
 
-    if (dialogActon === "BUY_CALL") {
+    if (dialogActon === CONFIRM_MODAL_OPTIONS.BUY_MINUTES) {
       buyMinutesBundle(device as Device, 100);
+    }
+
+    if (dialogActon === CONFIRM_MODAL_OPTIONS.SUSPEND) {
+      //suspend action here
+    }
+
+    if (dialogActon === CONFIRM_MODAL_OPTIONS.RESUME) {
+      //resume action here
+    }
+
+    if (dialogActon === CONFIRM_MODAL_OPTIONS.CANCEL) {
+      //cancel action here
     }
 
     dialogRef.current?.close();
   };
 
-  const openDialog = (action: DIALOG_ACTION) => {
+  const openDialog = (action: ConfirmModalOptions) => {
     setDialogAction(action);
 
     dialogRef.current?.showModal();
@@ -74,19 +96,31 @@ export default function DeviceDetails({
       {device && <DeviceItem showSettingsBtn={false} device={device} />}
       <div className="flex flex-col gap-3">
         <button
-          onClick={() => openDialog("BUY_SMS")}
+          onClick={() => openDialog(CONFIRM_MODAL_OPTIONS.BUY_SMS)}
           className="w-[100%] shadow-[5px_5px] p-3 rounded-xl bg-red-300 cursor-pointer shadow-red-900 hover:-translate-y-0.5 transition"
         >
           Buy sms bundle
         </button>
         <button
-          onClick={() => openDialog("BUY_CALL")}
+          onClick={() => openDialog(CONFIRM_MODAL_OPTIONS.BUY_MINUTES)}
           className="w-[100%] shadow-[5px_5px] p-3 rounded-xl bg-red-300 cursor-pointer shadow-red-900 hover:-translate-y-0.5 transition"
         >
           Buy call bundle
         </button>
         <button
-          onClick={() => openDialog("CANCEL")}
+          onClick={() =>
+            openDialog(
+              device?.status === "active"
+                ? CONFIRM_MODAL_OPTIONS.SUSPEND
+                : CONFIRM_MODAL_OPTIONS.RESUME
+            )
+          }
+          className="w-[100%] shadow-[5px_5px] p-3 rounded-xl bg-red-300 cursor-pointer shadow-red-900 hover:-translate-y-0.5 transition"
+        >
+          {device?.status === "active" ? "Suspend" : "Resume"} subscription
+        </button>
+        <button
+          onClick={() => openDialog(CONFIRM_MODAL_OPTIONS.CANCEL)}
           className="w-[100%] shadow-[5px_5px] p-3 rounded-xl bg-red-300 cursor-pointer shadow-red-900 hover:-translate-y-0.5 transition"
         >
           Cancel Subscription

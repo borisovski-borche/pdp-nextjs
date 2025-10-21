@@ -50,7 +50,7 @@ export default function LoginForm() {
           className={`bg-white shadow-gray-800 shadow-[3px_3px] p-1 grid border-2 rounded ${
             !errors.email ? "border-gray-800" : "border-red-400"
           }`}
-          type="text"
+          type="password"
           id="login-password"
         />
         {errors.password && (
