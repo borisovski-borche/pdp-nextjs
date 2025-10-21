@@ -7,7 +7,7 @@ export const DEVICE_MODELS = {
 } as const;
 
 export interface Device {
-  uid: string; //a unique uuid for the device
+  id: string; //a unique uuid for the device
   type: (typeof DEVICE_MODELS)[keyof typeof DEVICE_MODELS]; //type of the device
   name: string; //custom user name of the device
   contractType: "monthly" | "annual";
@@ -17,7 +17,7 @@ export interface Device {
     total: number; //total sms message allowed
   };
   minutes: {
-    userd: number; //currently used call minutes
+    used: number; //currently used call minutes
     total: number; //total minutes allowed
   };
 }

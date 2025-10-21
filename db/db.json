@@ -1,0 +1,102 @@
+{
+  "devices": [
+    {
+      "id": "f1a2c3e4-1111-4444-8888-abcdef123456",
+      "type": "nokia-3310",
+      "name": "Dad's Classic Phone",
+      "contractType": "monthly",
+      "status": "active",
+      "messages": {
+        "used": 72,
+        "total": 800
+      },
+      "minutes": {
+        "used": 140,
+        "total": 200
+      }
+    },
+    {
+      "id": "b2b2c2d2-2222-5555-9999-bb1234567890",
+      "type": "siemens-sx1",
+      "name": "Backup Device",
+      "contractType": "annual",
+      "status": "active",
+      "messages": {
+        "used": 188,
+        "total": 450
+      },
+      "minutes": {
+        "used": 220,
+        "total": 480
+      }
+    },
+    {
+      "id": "c3c3d3e3-3333-6666-aaaa-cc9876543210",
+      "type": "nokia-3250",
+      "name": "Music Phone",
+      "contractType": "monthly",
+      "status": "active",
+      "messages": {
+        "used": 45,
+        "total": 200
+      },
+      "minutes": {
+        "used": 60,
+        "total": 250
+      }
+    },
+    {
+      "id": "d4d4e4f4-4444-7777-bbbb-ddabcdefabcd",
+      "type": "nokia-e61",
+      "name": "Work Line",
+      "contractType": "annual",
+      "status": "active",
+      "messages": {
+        "used": 310,
+        "total": 500
+      },
+      "minutes": {
+        "used": 390,
+        "total": 500
+      }
+    },
+    {
+      "id": "e5e5f5g5-5555-8888-cccc-ee123abc4567",
+      "type": "nokia-1600",
+      "name": "Old Spare",
+      "contractType": "monthly",
+      "status": "suspended",
+      "messages": {
+        "used": 25,
+        "total": 150
+      },
+      "minutes": {
+        "used": 35,
+        "total": 180
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": "2ccd45b1-188e-4477-9fad-be172dc0385b",
+      "username": "firstuser",
+      "email": "first@gmail.com",
+      "password": "$2b$08$uyST3HI15DVIeW4T.yWsR.fU9sl.LgAHg4Hhx3ZkHFXKEEY.hhkK2",
+      "confirmPassword": "test1234"
+    },
+    {
+      "id": "9628d359-5f2b-45bf-9704-192b355610a0",
+      "username": "seconduser",
+      "email": "second@gmail.com",
+      "password": "$2b$08$1gnWAWuCbswVts5dXv3o/u6TDu5vj1kCaYcmFq/5iWozbg7pVvKE6",
+      "confirmPassword": "test1234"
+    },
+    {
+      "id": "3898a465-8098-414b-8d17-3f2961f701ef",
+      "username": "thirduser",
+      "email": "third@gmail.com",
+      "password": "$2b$08$QKipJqLb4MV8R0s/jfS.auRQQvbVNdKvrugCjd9QBSOi.gRrtt0Su",
+      "confirmPassword": "test1234"
+    }
+  ]
+}

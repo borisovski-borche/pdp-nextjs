@@ -1,8 +1,20 @@
 export interface UserData {
-  uid: string;
+  id: string;
   username: string;
   email: string;
   firstName: string;
   lastName: string;
   country: string;
+  password?: string;
+}
+
+export interface RegisterReq {
+  email: string;
+  password: string;
+  username: string;
+}
+
+export interface LoginReq {
+  email: string;
+  password: string;
 }

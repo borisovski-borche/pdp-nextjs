@@ -11,7 +11,7 @@ export default function Container({
 }: ContainerProps) {
   return (
     <section
-      className={`mx-auto min-w-md max-w-6xl shadow-[5px_5px] rounded-xl shadow-amber-600  bg-amber-100 ${customClasses}`}
+      className={`border-2 border-amber-600 mx-auto min-w-md max-w-6xl shadow-[5px_5px] rounded-xl shadow-amber-600  bg-amber-100 ${customClasses}`}
     >
       <h2 className="text-center text-3xl p-4 font-bold">{title}</h2>
       <div className="px-5">{children}</div>

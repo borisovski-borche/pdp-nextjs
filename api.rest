@@ -1,0 +1,6 @@
+PATCH http://localhost:3001/devices/f1a2c3e4-1111-4444-8888-abcdef123456
+Content-Type: application/json
+
+ {
+      "minutes": { "userd": 140, "total": 200 }
+}

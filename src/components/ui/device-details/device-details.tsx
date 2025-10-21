@@ -3,33 +3,30 @@
 import {
   buyMinutesBundle,
   buyMessageBundle,
-  fetchAllDevices,
   fetchDeviceById,
 } from "@/services/devices.service";
-import { useRouter } from "next/navigation";
 import DeviceItem from "../device-item/device-item";
-import { act, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDevicesStore } from "@/stores/devices.store";
-
-type DeviceDetailsProps = {
-  id: string;
-};
+import { Device } from "@/lib/models/device.model";
 
 type DIALOG_ACTION = "BUY_SMS" | "BUY_CALL" | "CANCEL";
 
-export default function DeviceDetails({ id }: DeviceDetailsProps) {
+export default function DeviceDetails({
+  fetchedDevice,
+}: {
+  fetchedDevice: Device;
+}) {
   const [dialogActon, setDialogAction] = useState<DIALOG_ACTION | null>(null);
 
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const router = useRouter();
-
-  const device = useDevicesStore(state =>
-    state.devices.find(device => device.uid === id)
-  );
+  const device = useDevicesStore(s => s.selectedDevice);
+  const setSelectedDevice = useDevicesStore(s => s.setSelectedDevice);
 
   useEffect(() => {
-    fetchAllDevices();
+    console.log(fetchedDevice);
+    setSelectedDevice(fetchedDevice);
   }, []);
 
   const confirmModalJSX = {
@@ -56,11 +53,11 @@ export default function DeviceDetails({ id }: DeviceDetailsProps) {
 
   const onConfirmClick = () => {
     if (dialogActon === "BUY_SMS") {
-      buyMessageBundle(device?.uid as string, 100);
+      buyMessageBundle(device as Device, 100);
     }
 
     if (dialogActon === "BUY_CALL") {
-      buyMinutesBundle(device?.uid as string, 100);
+      buyMinutesBundle(device as Device, 100);
     }
 
     dialogRef.current?.close();
@@ -72,10 +69,6 @@ export default function DeviceDetails({ id }: DeviceDetailsProps) {
     dialogRef.current?.showModal();
   };
 
-  //Fetch the device from the list
-  //Render the device item
-  //Render controls for adding credit (sms or minutes)
-  //Render a dialog for confirm the purchase
   return (
     <div className="pb-5 grid gap-5 grid-cols-[2fr_0.5fr] ">
       {device && <DeviceItem showSettingsBtn={false} device={device} />}

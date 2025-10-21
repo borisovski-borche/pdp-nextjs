@@ -1,11 +1,6 @@
 import { create } from "zustand";
-import Cookies from "js-cookie";
 import { createJSONStorage, persist } from "zustand/middleware";
-
-export interface UserData {
-  username: string;
-  email: string;
-}
+import { UserData } from "@/lib/models/auth.model";
 
 interface UserState {
   user: UserData | null;

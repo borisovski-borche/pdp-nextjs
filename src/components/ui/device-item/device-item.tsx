@@ -15,7 +15,7 @@ export default function DeviceItem({
   const router = useRouter();
 
   const onSettingsClick = () => {
-    router.push(`/devices/${device.uid}`);
+    router.push(`/devices/${device.id}`);
   };
 
   return (
@@ -56,7 +56,7 @@ export default function DeviceItem({
               <i className="fa-solid fa-clock"></i> Currently used minutes{" "}
             </span>
             <strong>
-              {device.minutes.userd} / {device.minutes.total}
+              {device.minutes.used} / {device.minutes.total}
             </strong>
           </p>
         </div>

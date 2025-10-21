@@ -1,5 +1,6 @@
 import Container from "@/components/common/container/container";
 import DeviceDetails from "@/components/ui/device-details/device-details";
+import { fetchDeviceById } from "@/services/devices.service";
 
 export default async function DeviceDetailsPage({
   params,
@@ -8,11 +9,11 @@ export default async function DeviceDetailsPage({
 }) {
   const { id } = await params;
 
-  console.log(id);
+  const device = await fetchDeviceById(id);
 
   return (
     <Container title="Device Details">
-      <DeviceDetails id={id} />
+      <DeviceDetails fetchedDevice={device} />
     </Container>
   );
 }

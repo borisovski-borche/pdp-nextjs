@@ -1,15 +1,25 @@
+import { RegisterReq, UserData } from "@/lib/models/auth.model";
 import { LoginFormValue } from "@/lib/schemas";
 import { useUserStore } from "@/stores/user.store";
-import Cookies from "js-cookie";
 
 export const loginUser = async (creds: LoginFormValue) => {
-  useUserStore.getState().setUser({ username: "MAJKA TI", email: "TATKO TI" });
+  const loginRes = await fetch("/api/login", {
+    method: "POST",
+    body: JSON.stringify(creds),
+  });
 
-  Cookies.set(
-    "auth-user",
-    JSON.stringify({ username: "bradata", email: creds.email }),
-    {
-      expires: 1,
-    }
-  );
+  const user: UserData = await loginRes.json();
+
+  useUserStore.getState().setUser(user);
+};
+
+export const registerUser = async (reqBody: RegisterReq) => {
+  const res = await fetch("/api/register", {
+    method: "POST",
+    body: JSON.stringify(reqBody),
+  });
+
+  const data = await res.json();
+
+  return data;
 };

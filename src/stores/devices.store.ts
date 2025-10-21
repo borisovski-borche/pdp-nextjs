@@ -3,8 +3,10 @@ import { create } from "zustand";
 
 interface DevicesState {
   devices: Device[];
+  selectedDevice: Device | null;
 
   setDevices(devices: Device[]): void;
+  setSelectedDevice(device: Device): void;
   updateDevice(id: string, updates: Partial<Device>): void;
   updateMessages(id: string, smsBundle: number): void;
   updateMinutes(id: string, smsBundle: number): void;
@@ -12,6 +14,12 @@ interface DevicesState {
 
 export const useDevicesStore = create<DevicesState>((set, get) => ({
   devices: [],
+  selectedDevice: null,
+
+  setSelectedDevice: (device: Device) => {
+    set({ selectedDevice: device });
+  },
+
   setDevices: (devices: Device[]) => {
     set({ devices });
   },
@@ -19,7 +27,7 @@ export const useDevicesStore = create<DevicesState>((set, get) => ({
     const state = get();
 
     const updatedDevices = state.devices.map(device => {
-      if (device.uid === id) {
+      if (device.id === id) {
         return { ...device, ...updates };
       }
       return device;
@@ -31,7 +39,7 @@ export const useDevicesStore = create<DevicesState>((set, get) => ({
     const state = get();
 
     const updatedDevices = state.devices.map(device => {
-      if (device.uid === id) {
+      if (device.id === id) {
         return {
           ...device,
           messages: {
@@ -49,7 +57,7 @@ export const useDevicesStore = create<DevicesState>((set, get) => ({
     const state = get();
 
     const updatedDevices = state.devices.map(device => {
-      if (device.uid === id) {
+      if (device.id === id) {
         return {
           ...device,
           minutes: {
