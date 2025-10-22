@@ -5,10 +5,10 @@
       "type": "nokia-3310",
       "name": "Dad's Classic Phone",
       "contractType": "monthly",
-      "status": "active",
+      "status": "suspended",
       "messages": {
         "used": 72,
-        "total": 1000
+        "total": 1200
       },
       "minutes": {
         "used": 140,
@@ -65,7 +65,7 @@
       "type": "nokia-1600",
       "name": "Old Spare",
       "contractType": "monthly",
-      "status": "suspended",
+      "status": "active",
       "messages": {
         "used": 25,
         "total": 150

@@ -1,6 +1,6 @@
 "use client";
 
-import { buyMinutesBundle, buyMessageBundle } from "@/services/devices.service";
+import { updateDevice } from "@/services/devices.service";
 import DeviceItem from "../device-item/device-item";
 import { JSX, useEffect, useRef, useState } from "react";
 import { useDevicesStore } from "@/stores/devices.store";
@@ -9,6 +9,7 @@ import {
   CONFIRM_MODAL_OPTIONS,
   ConfirmModalOptions,
 } from "@/lib/constants/device.constants";
+import { useRouter } from "next/navigation";
 
 export default function DeviceDetails({
   fetchedDevice,
@@ -20,6 +21,8 @@ export default function DeviceDetails({
   );
 
   const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const router = useRouter();
 
   const device = useDevicesStore(s => s.selectedDevice);
   const setSelectedDevice = useDevicesStore(s => s.setSelectedDevice);
@@ -62,24 +65,57 @@ export default function DeviceDetails({
   };
 
   const onConfirmClick = () => {
+    if (!device) return;
+
     if (dialogActon === CONFIRM_MODAL_OPTIONS.BUY_SMS) {
-      buyMessageBundle(device as Device, 100);
+      updateDevice(
+        device,
+        {
+          messages: {
+            used: device?.messages.used,
+            total: device?.messages.total + 100,
+          },
+        },
+        "Successfully added 100 sms messages to device"
+      );
     }
 
     if (dialogActon === CONFIRM_MODAL_OPTIONS.BUY_MINUTES) {
-      buyMinutesBundle(device as Device, 100);
+      updateDevice(
+        device,
+        {
+          minutes: {
+            used: device?.minutes.used,
+            total: device?.minutes.total + 100,
+          },
+        },
+        "Successfully added 100 call minutes to device"
+      );
     }
 
     if (dialogActon === CONFIRM_MODAL_OPTIONS.SUSPEND) {
-      //suspend action here
+      updateDevice(
+        device,
+        { status: "suspended" },
+        "Subscription successfully suspended"
+      );
     }
 
     if (dialogActon === CONFIRM_MODAL_OPTIONS.RESUME) {
-      //resume action here
+      updateDevice(
+        device,
+        { status: "active" },
+        "Subscription successfully resumed"
+      );
     }
 
     if (dialogActon === CONFIRM_MODAL_OPTIONS.CANCEL) {
-      //cancel action here
+      updateDevice(
+        device,
+        { status: "deactivated" },
+        "Subscription successfully cancelled"
+      );
+      router.push("/devices");
     }
 
     dialogRef.current?.close();

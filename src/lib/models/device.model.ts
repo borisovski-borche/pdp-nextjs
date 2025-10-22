@@ -11,7 +11,7 @@ export interface Device {
   type: (typeof DEVICE_MODELS)[keyof typeof DEVICE_MODELS]; //type of the device
   name: string; //custom user name of the device
   contractType: "monthly" | "annual";
-  status: "active" | "suspended";
+  status: "active" | "suspended" | "deactivated";
   messages: {
     used: number; //currently used sms msgs
     total: number; //total sms message allowed
