@@ -20,9 +20,14 @@ export default function LoginForm() {
   });
 
   const onLoginUser = async (value: LoginFormValue) => {
-    await loginUser(value);
-    router.push("/devices");
-    toast.success("Logged in successfully!");
+    try {
+      await loginUser(value);
+
+      router.push("/devices");
+      toast.success("Logged in successfully!");
+    } catch (error: any) {
+      toast.error(error);
+    }
   };
 
   const onFormSubmit = (value: LoginFormValue) => {

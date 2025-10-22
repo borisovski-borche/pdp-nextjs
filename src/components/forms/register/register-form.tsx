@@ -21,8 +21,6 @@ export default function RegisterForm() {
     resolver: zodResolver(registerSchema),
   });
 
-  console.log(user?.username);
-
   const onUserRegister = async (req: RegisterReq) => {
     const res: { msg: string } = await registerUser(req);
     router.push("/login");
@@ -42,7 +40,7 @@ export default function RegisterForm() {
           type="text"
           id="register-username"
           className={`bg-white shadow-gray-800 shadow-[3px_3px] p-1 grid border-2 rounded ${
-            !errors.email ? "border-gray-800" : "border-red-400"
+            !errors.username ? "border-gray-800" : "border-red-400"
           }`}
         />
         {errors.username && (
@@ -68,7 +66,7 @@ export default function RegisterForm() {
           type="password"
           id="register-password"
           className={`bg-white shadow-gray-800 shadow-[3px_3px] p-1 grid border-2 rounded ${
-            !errors.email ? "border-gray-800" : "border-red-400"
+            !errors.password ? "border-gray-800" : "border-red-400"
           }`}
         />
         {errors.password && (
@@ -82,7 +80,7 @@ export default function RegisterForm() {
           type="password"
           id="register-confirmPassword"
           className={`bg-white shadow-gray-800 shadow-[3px_3px] p-1 grid border-2 rounded ${
-            !errors.email ? "border-gray-800" : "border-red-400"
+            !errors.confirmPassword ? "border-gray-800" : "border-red-400"
           }`}
         />
         {errors.confirmPassword && (

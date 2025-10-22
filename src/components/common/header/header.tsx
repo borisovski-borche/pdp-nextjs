@@ -4,14 +4,16 @@ import { useUserStore } from "@/stores/user.store";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
+import { logout } from "@/services/auth.service";
 
 export default function Header() {
   const user = useUserStore(state => state.user);
 
   const onLogout = () => {
-    Cookies.remove("auth-user");
     toast.success("Logged out successfully!");
+    Cookies.remove("auth-user");
     useUserStore.persist.clearStorage();
+    logout();
   };
 
   const noUserNav = (

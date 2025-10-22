@@ -18,3 +18,9 @@ export interface LoginReq {
   email: string;
   password: string;
 }
+
+export interface ChangePassReq {
+  userId: string;
+  oldPassword: string;
+  newPassword: string;
+}

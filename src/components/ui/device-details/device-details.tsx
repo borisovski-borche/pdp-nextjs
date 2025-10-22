@@ -28,7 +28,6 @@ export default function DeviceDetails({
   const setSelectedDevice = useDevicesStore(s => s.setSelectedDevice);
 
   useEffect(() => {
-    console.log(fetchedDevice);
     setSelectedDevice(fetchedDevice);
   }, []);
 
