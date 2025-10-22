@@ -36,23 +36,23 @@ export default function LoginForm() {
 
   return (
     <form className="grid gap-3 pb-3" onSubmit={handleSubmit(onFormSubmit)}>
-      <div className="form-group">
+      <div className="grid">
         <label htmlFor="login-email">Email</label>
         <input
           {...register("email")}
           type="text"
           id="login-password"
-          className={`bg-white shadow-gray-800 shadow-[3px_3px] p-1 grid border-2 rounded ${
+          className={`grid rounded border-2 bg-white p-1 shadow-[3px_3px] shadow-gray-800 ${
             !errors.email ? "border-gray-800" : "border-red-400"
           }`}
         />
         {errors.email && <p className="text-red-400">{errors.email.message}</p>}
       </div>
-      <div className="form-group">
+      <div className="grid">
         <label htmlFor="login-email">Password</label>
         <input
           {...register("password")}
-          className={`bg-white shadow-gray-800 shadow-[3px_3px] p-1 grid border-2 rounded ${
+          className={`grid rounded border-2 bg-white p-1 shadow-[3px_3px] shadow-gray-800 ${
             !errors.email ? "border-gray-800" : "border-red-400"
           }`}
           type="password"
@@ -64,7 +64,7 @@ export default function LoginForm() {
       </div>
       <button
         type="submit"
-        className="justify-self-center w-[100px] shadow-[5px_5px] p-3 my-3 rounded-xl bg-blue-300 cursor-pointer shadow-blue-800 hover:-translate-y-0.5 transition"
+        className="my-3 w-[100px] cursor-pointer justify-self-center rounded-xl bg-blue-300 p-3 shadow-[5px_5px] shadow-blue-800 transition hover:-translate-y-0.5"
       >
         Submit
       </button>
