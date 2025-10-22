@@ -1,6 +1,12 @@
 import Container from "@/components/common/container/container";
 import DeviceList from "@/components/ui/device-list/device-list";
 import { fetchAllDevices } from "@/services/devices.service";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "B2 Portal - Devices",
+  description: "Page containing the list of devices for the user",
+};
 
 export default async function Devices() {
   const devices = await fetchAllDevices();
